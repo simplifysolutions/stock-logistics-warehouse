@@ -7,11 +7,12 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
-                <group name="procurement" position="after">
-                    <group name="Stock Procurement By Days">
-                    <field name="days_warehouse"/>
-                    <field name="days_stats"/>
-                    <field name="forecast_gap"/>
+                <group name="procurement_uom" position="after">
+                    <group string="Reordering Rule Automation">
+                        <field name="reorder_auto_type"/>
+                        <field name="days_warehouse"/>
+                        <field name="days_stats"/>
+                        <field name="forecast_gap"/>
                     </group>
                 </group>
             </field>
