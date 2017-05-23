@@ -47,11 +47,16 @@ class Orderpoint(models.Model):
             #TODO: Add a conversion if UOM doesn't match
             total_qty = sum(x.product_uom_qty for x in lines if
                         x.product_uom == product.uom_id)
-            if reorder_rule.qty_multiple:
-                total_qty -= (total_qty % reorder_rule.qty_multiple)
-            rule_max = total_qty / product.days_stats * \
+            rule_min = total_qty / product.days_stats * \
                 (1 + product.forecast_gap / 100) * product.days_warehouse
-            reorder_rule.write({'product_max_qty': rule_max})
+            rule_max = rule_min + (rule_min / 2)
+            if reorder_rule.qty_multiple:
+                rule_min -= (rule_min % reorder_rule.qty_multiple)
+                rule_max -= (rule_max % reorder_rule.qty_multiple)
+            reorder_rule.write({
+                'product_min_qty': rule_min,
+                'product_max_qty': rule_max,
+                })
 
         return True
 
