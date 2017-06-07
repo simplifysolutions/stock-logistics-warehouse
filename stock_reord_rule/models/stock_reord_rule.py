@@ -19,7 +19,7 @@ class Orderpoint(models.Model):
 
         product_obj = self.env['product.product']
         products = product_obj.search([
-            ('reorder_auto_type','in',['sale','mrp']),
+            ('reorder_auto_type','=','sale'),
             ])
         for product in products:
             reorder_rule = self.env['stock.warehouse.orderpoint'].search([
@@ -31,22 +31,26 @@ class Orderpoint(models.Model):
             from_date = (fields.Date.from_string(
                 fields.Date.today()) - timedelta(
                         days=product.days_stats)).strftime(DATETIME_FORMAT)
-            if product.reorder_auto_type == 'mrp':
-                lines = self.env['stock.move'].search([
-                    ('date','>',from_date),
-                    ('product_id','=',product.id),
-                    '|',('production_id','!=',False),
-                    ('raw_material_production_id','!=',False),
-                    ])
-            else:
-                lines = self.env['sale.order.line'].search([
-                    ('date_order','>',from_date),
-                    ('product_id','=',product.id),
-                    ('order_id.state','in',['done','confirmed']),
-                    ])
+
+            def _sale_search(product_id):
+                return self.env['sale.order.line'].search([
+                ('order_id.date_order','>',from_date),
+                ('product_id','=',product_id),
+                ('order_id.state','in',['done','confirmed']),
+                ])
+
+            lines = _sale_search(product.id)
             #TODO: Add a conversion if UOM doesn't match
             total_qty = sum(x.product_uom_qty for x in lines if
                         x.product_uom == product.uom_id)
+            bom_lines = self.env['mrp.bom.line'].search([
+                ('product_id','=',product.id),
+                ])
+            for bom_line in bom_lines:
+                bom_lines = _sale_search(bom_line.bom_id.product_id.id)
+                total_qty += sum(x.product_uom_qty * bom_line.product_qty
+                        for x in bom_lines if
+                        x.product_uom == bom_line.bom_id.product_id.uom_id)
             rule_min = total_qty / product.days_stats * \
                 (1 + product.forecast_gap / 100) * product.days_warehouse
             rule_max = rule_min + (rule_min / 2)
@@ -65,9 +69,8 @@ class Product(models.Model):
 
     reorder_auto_type = fields.Selection([
         ('none','None'),
-        ('mrp','Manufactured'),
         ('sale','Sold'),
-        ], 'Reordering Calculation Method', default='none')
+        ], 'Reordering Calculation', default='none')
     days_warehouse = fields.Integer('Safety Stock Days')
     days_stats = fields.Integer('Statistics Days')
     forecast_gap = fields.Float('Variance Percentage',
