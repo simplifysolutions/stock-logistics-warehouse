@@ -19,7 +19,7 @@ class Orderpoint(models.Model):
 
         product_obj = self.env['product.product']
         products = product_obj.search([
-            ('reorder_auto_type','=','sale'),
+            ('reorder_auto','=',True),
             ])
         for product in products:
             reorder_rule = self.env['stock.warehouse.orderpoint'].search([
@@ -67,10 +67,8 @@ class Orderpoint(models.Model):
 class Product(models.Model):
     _inherit = 'product.product'
 
-    reorder_auto_type = fields.Selection([
-        ('none','None'),
-        ('sale','Sold'),
-        ], 'Reordering Calculation', default='none')
+    reorder_auto = fields.Boolean('Automatic Reordering Calculation',
+        default=False)
     days_warehouse = fields.Integer('Safety Stock Days')
     days_stats = fields.Integer('Statistics Days')
     forecast_gap = fields.Float('Variance Percentage',

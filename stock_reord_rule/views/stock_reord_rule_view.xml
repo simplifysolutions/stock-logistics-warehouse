@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <group name="procurement_uom" position="after">
                     <group string="Reordering Rule Automation">
-                        <field name="reorder_auto_type"/>
+                        <field name="reorder_auto"/>
                         <field name="days_warehouse"/>
                         <field name="days_stats"/>
                         <field name="forecast_gap"/>
