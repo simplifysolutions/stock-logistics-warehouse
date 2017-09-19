@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-04 08:32+0000\n"
-"PO-Revision-Date: 2017-03-04 08:32+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-08-22 01:01+0000\n"
+"PO-Revision-Date: 2017-08-22 01:01+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -78,7 +79,7 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -99,22 +100,22 @@ msgstr ""
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst gewijzigd op"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -203,7 +204,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_tree
 #: field:report.stock.traceability_operation,picking_id:0
 msgid "Reference"
-msgstr ""
+msgstr "Referentie"
 
 #. module: stock_traceability_operation
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
@@ -214,7 +215,7 @@ msgstr ""
 #: view:report.stock.traceability_operation:stock_traceability_operation.report_stock_traceability_operation_search
 #: field:report.stock.traceability_operation,origin:0
 msgid "Source"
-msgstr ""
+msgstr "Bron"
 
 #. module: stock_traceability_operation
 #: field:report.stock.traceability_operation,location_id:0
