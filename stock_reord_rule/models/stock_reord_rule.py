@@ -69,9 +69,12 @@ class Product(models.Model):
 
     reorder_auto = fields.Boolean('Automatic Reordering Calculation',
         default=False)
-    days_warehouse = fields.Integer('Safety Stock Days')
-    days_stats = fields.Integer('Statistics Days')
-    forecast_gap = fields.Float('Variance Percentage',
-                                 digits=(6, 3))
+    days_warehouse = fields.Integer('Safety Stock Days',
+        help="The number of days to keep stock for when calculating the max")
+    days_stats = fields.Integer('Statistics Days',
+        help="The number of days to use in the calculation."\
+                "Total Qty / Number of Days = 1 day required stock")
+    forecast_gap = fields.Float('Variance Percentage', digits=(6, 3),
+        help="Variance adjustment (+ or -) to the formula")
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
